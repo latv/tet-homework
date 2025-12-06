@@ -1,0 +1,14 @@
+{
+    "name": "tet/products",
+    "autoload": {
+        "psr-4": {
+            "Tet\\Products\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Janis Feldmanis"
+        }
+    ],
+    "require": {}
+}

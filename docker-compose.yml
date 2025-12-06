@@ -1,0 +1,90 @@
+services:
+  # 💾 Shared MySQL Database
+  mysql:
+    image: mysql:8.0
+    container_name: shared_mysql
+    restart: unless-stopped
+    environment:
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+      MYSQL_DATABASE: ${MYSQL_DATABASE}
+      MYSQL_USER: ${MYSQL_USER}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+    ports:
+      - "${MYSQL_PORT}:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+    networks:
+      - app-network
+
+  # 🏠 Main Module
+  main:
+    build:
+      context: ./main
+      dockerfile: Dockerfile
+    container_name: main_app
+    restart: unless-stopped
+    ports:
+      - "${MAIN_PORT}:8000" # Uses 8000 from .env
+    environment:
+      DB_HOST: ${DB_HOST}
+      DB_DATABASE: ${MYSQL_DATABASE}
+      DB_USERNAME: ${MYSQL_USER}
+      DB_PASSWORD: ${MYSQL_PASSWORD}
+    depends_on:
+      - mysql
+    networks:
+      - app-network
+    volumes:
+      - ./main:/var/www/html  # <--- BIND MOUNT ADDED
+      - ./packages/products:/var/www/packages/products
+
+  # 📦 Orders Module
+  orders:
+    build:
+      context: ./orders
+      dockerfile: Dockerfile
+    container_name: orders_app
+    restart: unless-stopped
+    ports:
+      - "${ORDERS_PORT}:8000" # Uses 8001 from .env
+    environment:
+      DB_HOST: ${DB_HOST}
+      DB_DATABASE: ${MYSQL_DATABASE}
+      DB_USERNAME: ${MYSQL_USER}
+      DB_PASSWORD: ${MYSQL_PASSWORD}
+    depends_on:
+      - mysql
+    networks:
+      - app-network
+    volumes:
+      - ./orders:/var/www/html  # <--- BIND MOUNT ADDED
+      - ./packages/products:/var/www/packages/products
+
+  # 🏷️ Products Module
+  products:
+    build:
+      context: ./products
+      dockerfile: Dockerfile
+    container_name: products_app
+    restart: unless-stopped
+    ports:
+      - "${PRODUCTS_PORT}:8000" # Uses 8002 from .env
+    environment:
+      DB_HOST: ${DB_HOST}
+      DB_DATABASE: ${MYSQL_DATABASE}
+      DB_USERNAME: ${MYSQL_USER}
+      DB_PASSWORD: ${MYSQL_PASSWORD}
+    depends_on:
+      - mysql
+    networks:
+      - app-network
+    volumes:
+      - ./products:/var/www/html  # <--- BIND MOUNT ADDED
+
+volumes:
+  mysql_data:
+    driver: local
+
+networks:
+  app-network:
+    driver: bridge
