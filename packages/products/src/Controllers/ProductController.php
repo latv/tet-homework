@@ -26,6 +26,15 @@ class ProductController extends Controller
         return view('products::show', compact('product'));
     }
 
+    public function editView($id)
+    {
+        $client = new \GuzzleHttp\Client();
+        $response = $client->get('http://products:8000/api/products/' . $id);
+        $product = json_decode($response->getBody()->getContents(), true);
+        
+        return view('products::edit_view', compact('product'));
+    }
+
     public function createView()
     {
         return view('products::create_view');
