@@ -1,5 +1,4 @@
 services:
-  # 💾 Shared MySQL Database
   mysql:
     image: mysql:8.0
     container_name: shared_mysql
@@ -16,7 +15,6 @@ services:
     networks:
       - app-network
 
-  # 🏠 Main Module
   main:
     build:
       context: ./main
@@ -24,7 +22,7 @@ services:
     container_name: main_app
     restart: unless-stopped
     ports:
-      - "8000:8000" # Uses 8000 from .env
+      - "8000:8000"
     environment:
       DB_HOST: ${DB_HOST}
       DB_DATABASE: ${MYSQL_DATABASE}
@@ -38,15 +36,15 @@ services:
       - ./main:/var/www/html
       - ./packages/products:/var/www/html/vendor/tet/products
 
-  # 📦 Orders Module
-  orders:
+
+  coupons:
     build:
-      context: ./orders
+      context: ./coupons
       dockerfile: Dockerfile
-    container_name: orders_app
+    container_name: coupons_app
     restart: unless-stopped
     ports:
-      - "${ORDERS_PORT}:8000" # Uses 8001 from .env
+      - "${COUPONS_PORT}:8000" # Uses 8001 from .env
     environment:
       DB_HOST: ${DB_HOST}
       DB_DATABASE: ${MYSQL_DATABASE}
@@ -57,7 +55,7 @@ services:
     networks:
       - app-network
     volumes:
-      - ./orders:/var/www/html  # <--- BIND MOUNT ADDED
+      - ./coupons:/var/www/html  # <--- BIND MOUNT ADDED
       - ./packages/products:/var/www/packages/products
 
   # 🏷️ Products Module

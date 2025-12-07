@@ -10,10 +10,8 @@
                         @csrf
                         @method('PUT') 
 
-                        {{-- Name Field --}}
                         <div class="mb-3">
                             <label for="name" class="form-label">Product Name</label>
-                            {{-- Removed @error('name') is-invalid @enderror --}}
                             <input type="text" 
                                    class="form-control" 
                                    id="name" 
@@ -22,10 +20,8 @@
                                    required>
                         </div>
 
-                        {{-- Description Field --}}
                         <div class="mb-3">
                             <label for="description" class="form-label">Description</label>
-                            {{-- Removed @error('description') is-invalid @enderror --}}
                             <textarea class="form-control" 
                                       id="description" 
                                       name="description" 
@@ -33,10 +29,8 @@
                                       required>{{ old('description', $product['description']) }}</textarea>
                         </div>
 
-                        {{-- Price Field --}}
                         <div class="mb-3">
-                            <label for="price" class="form-label">Price ($)</label>
-                            {{-- Removed @error('price') is-invalid @enderror --}}
+                            <label for="price" class="form-label">Price (EUR)</label>
                             <input type="number" 
                                    class="form-control" 
                                    id="price" 
@@ -47,10 +41,8 @@
                                    required>
                         </div>
 
-                        {{-- Stock Field --}}
                         <div class="mb-3">
                             <label for="stock" class="form-label">Stock Quantity</label>
-                            {{-- Removed @error('stock') is-invalid @enderror --}}
                             <input type="number" 
                                    class="form-control" 
                                    id="stock" 
@@ -60,7 +52,6 @@
                                    required>
                         </div>
 
-                        {{-- Is Active Checkbox --}}
                         <div class="mb-3 form-check">
                             <input type="checkbox" 
                                    class="form-check-input" 
@@ -72,12 +63,10 @@
                         </div>
                         
                         <div class="d-flex justify-content-between pt-3">
-                            {{-- Back Button (Assumes 'products.show' route exists to go back to details) --}}
                             <a href="{{ route('products.show', $product['id']) }}" class="btn btn-secondary">
                                 Cancel
                             </a>
 
-                            {{-- Submit Button --}}
                             <button type="submit" class="btn btn-primary">
                                 Update Product
                             </button>

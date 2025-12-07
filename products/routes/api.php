@@ -8,6 +8,5 @@ Route::prefix('api')->group(function () {
     Route::get('products/{id}', [ProductController::class, 'show']);
     Route::post('products', [ProductController::class, 'store']);
     Route::put('products/{id}', [ProductController::class, 'update']);
-
-    // add rest of routing
+    Route::delete('products/{id}', [ProductController::class, 'destroy']);
 });

@@ -5,16 +5,9 @@
 
             <div class="card shadow-sm">
                 <div class="card-body">
-                    {{-- 
-                        Form setup:
-                        - action: Uses the Laravel route helper to point to the store method ('products.store').
-                        - method: Always 'POST' for creation.
-                        - @csrf: Mandatory Blade directive for security (Cross-Site Request Forgery protection).
-                    --}}
+
                     <form action="{{ route('products.store') }}" method="POST">
                         @csrf
-
-                        {{-- Name Field --}}
                         <div class="mb-3">
                             <label for="name" class="form-label">Product Name</label>
                             <input type="text" 
@@ -24,7 +17,6 @@
                                    required>
                         </div>
 
-                        {{-- Description Field --}}
                         <div class="mb-3">
                             <label for="description" class="form-label">Description</label>
                             <textarea class="form-control" 
@@ -32,12 +24,10 @@
                                       name="description" 
                                       rows="4" 
                                       required></textarea>
-                            {{-- Removed: @error('description') and old('description') --}}
                         </div>
 
-                        {{-- Price Field --}}
                         <div class="mb-3">
-                            <label for="price" class="form-label">Price ($)</label>
+                            <label for="price" class="form-label">Price (EUR)</label>
                             <input type="number" 
                                    class="form-control" 
                                    id="price" 
@@ -45,10 +35,8 @@
                                    step="0.01" 
                                    min="0" 
                                    required>
-                            {{-- Removed: @error('price') and old('price') --}}
                         </div>
 
-                        {{-- Stock Field --}}
                         <div class="mb-3">
                             <label for="stock" class="form-label">Stock Quantity</label>
                             <input type="number" 
@@ -57,10 +45,8 @@
                                    name="stock" 
                                    min="0" 
                                    required>
-                            {{-- Removed: @error('stock') and old('stock') --}}
                         </div>
 
-                        {{-- Is Active Checkbox --}}
                         <div class="mb-3 form-check">
                             <input type="checkbox" 
                                    class="form-check-input" 
@@ -71,12 +57,10 @@
                         </div>
                         
                         <div class="d-flex justify-content-between pt-3">
-                            {{-- Back Button (Assumes 'products.index' route exists) --}}
                             <a href="{{ route('products.index') }}" class="btn btn-secondary">
                                 Cancel
                             </a>
 
-                            {{-- Submit Button --}}
                             <button type="submit" class="btn btn-primary">
                                 Create Product
                             </button>

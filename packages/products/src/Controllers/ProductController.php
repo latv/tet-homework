@@ -89,18 +89,15 @@ class ProductController extends Controller
             'form_params' => $data
         ]);
 
-        redirect()->route('products.show', ['id' => $id]);
+        return redirect()->route('products.show', ['id' => $id]);
     }
 
     public function destroy($id)
     {
-        $product = Product::find($id);
-        if (! $product) {
-            return response()->json(['message' => 'Product not found'], 404);
-        }
+        $client = new \GuzzleHttp\Client();
+        
+        $client->delete('http://products:8000/api/products/' . $id);
 
-        $product->delete();
-
-        return response()->json(['message' => 'Product deleted']);
+        return redirect()->route('products.index');
     }
 }
