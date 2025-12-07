@@ -17,28 +17,30 @@ class ProductController extends Controller
         return response()->json($products);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
-    {
-        $request->validate([
-            'name' => 'required|string|max:255',
-            'description' => 'nullable|string',
-            'price' => 'required|numeric|min:0',
-            'stock' => 'required|integer|min:0',
-        ]);
+public function store(Request $request)
+{
+        \Log::debug($request->all());
 
-        $product = Product::create([
-  "name" => "asd",
-  "description" => "asd",
-  "price" => "3",
-  "stock" => "3",
-  "is_active" => 1
-]);
+    $request->validate([
+        'name' => 'required|string|max:255',
+        'description' => 'nullable|string',
+        'price' => 'required|numeric|min:0',
+        'stock' => 'required|integer|min:0',
+        'is_active' => 'nullable|boolean', 
+    ]);
 
-        return response()->json($product, 201);
-    }
+    // Pass the request data directly to the create method.
+    // The Product model has a $fillable property that allows these fields to be mass assigned.
+    $product = Product::create($request->only([
+        'name', 
+        'description', 
+        'price', 
+        'stock', 
+        'is_active',
+    ]));
+    \Log::debug($product);
+    return response()->json($product, 201);
+}
 
     /**
      * Display the specified resource.

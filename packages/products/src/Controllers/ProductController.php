@@ -50,8 +50,10 @@ class ProductController extends Controller
         }
 
         $client = new \GuzzleHttp\Client();
-        $response = $client->post('http://products:8000/api/products', $data);
-
+        $response = $client->post('http://products:8000/api/products', [
+            'form_params' => $data
+        ]);
+        
         return redirect()->route('products.index');
     }
 
