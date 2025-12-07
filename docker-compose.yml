@@ -24,7 +24,7 @@ services:
     container_name: main_app
     restart: unless-stopped
     ports:
-      - "${MAIN_PORT}:8000" # Uses 8000 from .env
+      - "8000:8000" # Uses 8000 from .env
     environment:
       DB_HOST: ${DB_HOST}
       DB_DATABASE: ${MYSQL_DATABASE}
