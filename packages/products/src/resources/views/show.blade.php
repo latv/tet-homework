@@ -1,0 +1,25 @@
+
+
+<div class="container">
+@if(isset($product) && count($product))
+
+<a href="{{ route('products.index') }}" class="btn btn-secondary">
+        Back to Products
+</a>
+    <h1>Product Details</h1>
+    <div class="card">
+        <div class="card-body">
+            <h5 class="card-title">{{ $product['name'] }}</h5>
+            <p class="card-text"><strong>Description:</strong> {{ $product['description'] }}</p>
+            <p class="card-text"><strong>Price:</strong> ${{ number_format($product['price'], 2) }}</p>
+            <p class="card-text"><strong>In stock:</strong> {{ $product['stock'] }}</p>
+            <p class="card-text"><strong>Created At:</strong> {{ \Carbon\Carbon::parse($product['created_at'])->format('Y-m-d') }}</p>
+        </div>
+    </div>
+
+@else
+    <div class="alert alert-warning text-center mb-0">
+        No products found.
+    </div>
+@endif
+</div>

@@ -35,8 +35,8 @@ services:
     networks:
       - app-network
     volumes:
-      - ./main:/var/www/html  # <--- BIND MOUNT ADDED
-      - ./packages/products:/var/www/packages/products
+      - ./main:/var/www/html
+      - ./packages/products:/var/www/html/vendor/tet/products
 
   # 📦 Orders Module
   orders:

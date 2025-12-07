@@ -14,28 +14,27 @@ class ProductController extends Controller
         $client = new \GuzzleHttp\Client();
         $response = $client->get('http://products:8000/api/products');
         $products = json_decode($response->getBody()->getContents(), true);
-        // dd($products);
+
         return view('products::index', compact('products'));
     }
 
     public function show($id, Request $request)
     {
-        $product = Product::find($id);
-        if (! $product) {
-            return response()->json(['message' => 'Product not found'], 404);
-        }
-
-        if ($request->wantsJson()) {
-            return response()->json($product);
-        }
-
+        $client = new \GuzzleHttp\Client();
+        $response = $client->get('http://products:8000/api/products/' . $id);
+        $product = json_decode($response->getBody()->getContents(), true);
         return view('products::show', compact('product'));
+    }
+
+    public function createView()
+    {
+        return view('products::create_view');
     }
 
     public function store(Request $request)
     {
+        
         $data = $request->only(['name', 'description', 'price', 'stock', 'is_active']);
-
         $rules = [
             'name' => 'required|string|max:255',
             'description' => 'nullable|string',
@@ -49,7 +48,7 @@ class ProductController extends Controller
             return response()->json(['errors' => $validator->errors()], 422);
         }
 
-        $product = Product::create($validator->validated());
+        
 
         return response()->json($product, 201);
     }
