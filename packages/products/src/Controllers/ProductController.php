@@ -44,13 +44,15 @@ class ProductController extends Controller
         ];
 
         $validator = Validator::make($data, $rules);
+        
         if ($validator->fails()) {
             return response()->json(['errors' => $validator->errors()], 422);
         }
 
-        
+        $client = new \GuzzleHttp\Client();
+        $response = $client->post('http://products:8000/api/products', $data);
 
-        return response()->json($product, 201);
+        return redirect()->route('products.index');
     }
 
     public function update($id, Request $request)

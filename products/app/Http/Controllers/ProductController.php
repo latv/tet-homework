@@ -29,7 +29,13 @@ class ProductController extends Controller
             'stock' => 'required|integer|min:0',
         ]);
 
-        $product = Product::create($request->all());
+        $product = Product::create([
+  "name" => "asd",
+  "description" => "asd",
+  "price" => "3",
+  "stock" => "3",
+  "is_active" => 1
+]);
 
         return response()->json($product, 201);
     }
