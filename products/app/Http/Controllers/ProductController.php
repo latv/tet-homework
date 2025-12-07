@@ -54,8 +54,10 @@ public function store(Request $request)
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Product $product)
+    public function update(int $id, Request $request)
     {
+        $product = Product::where('id', $id)->firstOrFail();
+        \Log::debug($product);
         $request->validate([
             'name' => 'required|string|max:255',
             'description' => 'nullable|string',

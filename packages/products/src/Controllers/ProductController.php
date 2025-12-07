@@ -68,10 +68,6 @@ class ProductController extends Controller
 
     public function update($id, Request $request)
     {
-        $product = Product::find($id);
-        if (! $product) {
-            return response()->json(['message' => 'Product not found'], 404);
-        }
 
         $data = $request->only(['name', 'description', 'price', 'stock', 'is_active']);
 
@@ -88,10 +84,12 @@ class ProductController extends Controller
             return response()->json(['errors' => $validator->errors()], 422);
         }
 
-        $product->fill($validator->validated());
-        $product->save();
+        $client = new \GuzzleHttp\Client();
+        $response = $client->put('http://products:8000/api/products/'. $id, [
+            'form_params' => $data
+        ]);
 
-        return response()->json($product);
+        redirect()->route('products.show', ['id' => $id]);
     }
 
     public function destroy($id)
