@@ -104,8 +104,8 @@
 
         <nav class="nav-menu">
             <ul>
-                <li><a href="/products">Products</a></li>
-                <li><a href="/orders">Orders</a></li>
+                <li><a href="{{ route('products.index') }}">Products</a></li>
+                <li><a href="{{ route('coupons.index') }}">Coupons</a></li>
             </ul>
         </nav>
 
