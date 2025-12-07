@@ -35,6 +35,8 @@ services:
     volumes:
       - ./main:/var/www/html
       - ./packages/products:/var/www/html/vendor/tet/products
+      - ./packages/coupons:/var/www/html/vendor/tet/coupons
+
 
 
   coupons:

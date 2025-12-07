@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "a3700d7713d9fbb77905e7385267a55e",
+    "content-hash": "3bd109eb1061c1f57d748bc06fe4217b",
     "packages": [
         {
             "name": "brick/math",
@@ -5787,6 +5787,38 @@
                 }
             ],
             "time": "2025-10-27T20:36:44+00:00"
+        },
+        {
+            "name": "tet/coupons",
+            "version": "1.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/latv/coupons.git",
+                "reference": "cf453b23e54235ea5408ac67a409f28812eb289c"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/latv/coupons/zipball/cf453b23e54235ea5408ac67a409f28812eb289c",
+                "reference": "cf453b23e54235ea5408ac67a409f28812eb289c",
+                "shasum": ""
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Tet\\Coupons\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "authors": [
+                {
+                    "name": "Janis Feldmanis"
+                }
+            ],
+            "support": {
+                "issues": "https://github.com/latv/coupons/issues",
+                "source": "https://github.com/latv/coupons/tree/v1.0.0"
+            },
+            "time": "2025-12-07T17:35:00+00:00"
         },
         {
             "name": "tet/products",
