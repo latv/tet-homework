@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Product;
 use Illuminate\Http\Request;
+use Tet\Helper\CommonFormatter;
 
 class ProductController extends Controller
 {
@@ -40,6 +41,8 @@ class ProductController extends Controller
     public function show(int $id)
     {
         $product = Product::where('id', $id)->firstOrFail();
+
+        $product->totalAmount = CommonFormatter::productTotalAmount($product->price, $product->stock);
         return response()->json($product);
     }
 

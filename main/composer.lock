@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "3bd109eb1061c1f57d748bc06fe4217b",
+    "content-hash": "5068b6b6d4784085fce63aacd0cf2d9b",
     "packages": [
         {
             "name": "brick/math",
@@ -5821,6 +5821,47 @@
             "time": "2025-12-07T17:35:00+00:00"
         },
         {
+            "name": "tet/helper",
+            "version": "dev-main",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/latv/helper.git",
+                "reference": "50b17187ac6d3e778afd7776c40c0e1f9a78a682"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/latv/helper/zipball/50b17187ac6d3e778afd7776c40c0e1f9a78a682",
+                "reference": "50b17187ac6d3e778afd7776c40c0e1f9a78a682",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^8.2"
+            },
+            "default-branch": true,
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Tet\\Helper\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Jānis Feldmanis",
+                    "email": "janis_feldmanis@outlook.com"
+                }
+            ],
+            "description": "Common helper methods for the Tet homework project",
+            "support": {
+                "issues": "https://github.com/latv/helper/issues",
+                "source": "https://github.com/latv/helper/tree/main"
+            },
+            "time": "2025-12-08T16:59:29+00:00"
+        },
+        {
             "name": "tet/products",
             "version": "dev-main",
             "source": {
@@ -8504,6 +8545,7 @@
     ],
     "minimum-stability": "stable",
     "stability-flags": {
+        "tet/helper": 20,
         "tet/products": 20
     },
     "prefer-stable": true,
