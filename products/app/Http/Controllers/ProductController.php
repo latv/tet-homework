@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Product;
 use Illuminate\Http\Request;
 use Tet\Helper\Common;
+use App\Imports\ProductsImport;
+use Maatwebsite\Excel\Facades\Excel;
 
 class ProductController extends Controller
 {
@@ -67,5 +69,17 @@ class ProductController extends Controller
         Product::where('id', $id)->firstOrFail()->delete();
 
         return response()->noContent();
+    }
+
+    public function import(Request $request) 
+    {
+        $request->validate([
+            'file' => 'required|mimes:xlsx,csv',
+        ]);
+
+        // This pushes the job to the queue and returns immediately
+        Excel::queueImport(new ProductsImport, $request->file('file'));
+
+        return back()->with('success', 'Import started! We will email you when finished.');
     }
 }
