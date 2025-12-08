@@ -80,6 +80,6 @@ class ProductController extends Controller
         // This pushes the job to the queue and returns immediately
         Excel::queueImport(new ProductsImport, $request->file('file'));
 
-        return back()->with('success', 'Import started! We will email you when finished.');
+        return response()->json(['message' => 'Import started'], 202);
     }
 }
