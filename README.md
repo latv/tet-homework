@@ -1,6 +1,6 @@
 # tet-homework setup
 
-# copy docker compose .env
+# copy docker compose .env (root directory)
 ```
 cp env.example .env
 ```
@@ -38,4 +38,23 @@ docker compose exec products php artisan queue:work
 ```
 sudo docker compose exec -e DB_CONNECTION=sqlite -e DB_DATABASE=:memory: products php artisan test tests/Feature/ProductCrudTest.php
 sudo docker compose exec -e DB_CONNECTION=sqlite -e DB_DATABASE=:memory: coupons php artisan test tests/Feature/CouponTest.php
+```
+
+# in devlopment setup
+
+uncoment lines in `docker-compose.yml` file where is saying in comment 'uncomment ...'
+
+inside in folders `packages` create three seprate folders 'coupons', 'helper', 'products'
+
+in these three folder clone these github repositories (should correspond respectivaly)
+
+https://github.com/latv/coupons
+https://github.com/latv/helper
+https://github.com/latv/products
+
+
+and restart (if it`s not started) docker containers
+```
+sudo docker compose down
+sudo docker compose up -d
 ```
