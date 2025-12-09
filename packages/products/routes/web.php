@@ -12,3 +12,4 @@ Route::post('products', [ProductController::class, 'store'])->name('products.sto
 Route::put('products/{id}', [ProductController::class, 'update'])->name('products.update');
 Route::patch('products/{id}', [ProductController::class, 'update']);
 Route::delete('products/{id}', [ProductController::class, 'destroy'])->name('products.destroy');
+Route::post('products/import', [ProductController::class, 'import'])->name('products.import'); // <--- Add this line

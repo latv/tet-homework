@@ -2,6 +2,11 @@
         <a href="{{ route('products.create.view') }}" class="btn btn-success">
             Create Product
         </a>
+<form action="{{ route('products.import') }}" method="POST" enctype="multipart/form-data" class="d-flex gap-2 align-items-center">
+        @csrf
+        <input type="file" name="file" class="form-control" required accept=".csv, .xlsx">
+        <button type="submit" class="btn btn-warning">Import</button>
+    </form>
 <div class="card shadow-sm">
 
     <div class="card-body">

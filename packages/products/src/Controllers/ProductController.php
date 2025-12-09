@@ -100,4 +100,31 @@ class ProductController extends Controller
 
         return redirect()->route('products.index');
     }
+
+    public function import(Request $request)
+    {
+        $request->validate([
+            'file' => 'required|file|mimes:xlsx,csv',
+        ]);
+
+        $file = $request->file('file');
+
+        $client = new \GuzzleHttp\Client();
+        
+        try {
+            $client->post('http://products:8000/api/products/import', [
+                'multipart' => [
+                    [
+                        'name'     => 'file',
+                        'contents' => fopen($file->getPathname(), 'r'),
+                        'filename' => $file->getClientOriginalName(),
+                    ],
+                ],
+            ]);
+        } catch (\Exception $e) {
+            return redirect()->route('products.index')->with('error', 'Import failed.');
+        }
+
+        return redirect()->route('products.index');
+    }
 }
