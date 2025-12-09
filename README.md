@@ -44,9 +44,25 @@ sudo docker compose exec -e DB_CONNECTION=sqlite -e DB_DATABASE=:memory: coupons
 
 Uncoment lines in `docker-compose.yml` file where is saying in comment 'uncomment ...'.
 
+
+# Each module you should install Laravel packages
+
+```
+cd ./coupons/
+composer install
+cd ../products/
+composer install
+cd ../main/
+composer install
+# to root folder
+cd ..
+```
+
 Inside in folders `packages` create three seprate folders 'coupons', 'helper', 'products'
 
 in these three folder clone these github repositories (should correspond respectivaly)
+
+
 ```
 https://github.com/latv/coupons
 https://github.com/latv/helper
