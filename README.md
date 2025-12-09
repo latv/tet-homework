@@ -1,11 +1,11 @@
-# tet-homework setup
+# TET homework setup
 
-# copy docker compose .env (root directory)
+# Copy docker compose `.env` (root directory)
 ```
 cp env.example .env
 ```
 
-# copy each container 
+# Copy each container `.env`
 ```
 cp main/.env.example main/.env
 cp coupons/.env.example coupons/.env
@@ -18,7 +18,7 @@ cp products/.env.example products/.env
 docker-compose up -d --build
 ```
 
-# Generate Keys and run migration
+# Generate keys and run migration
 ```
 docker compose exec main php artisan key:generate
 docker compose exec coupons php artisan key:generate
@@ -29,29 +29,29 @@ docker compose exec coupons php artisan migrate
 docker compose exec products php artisan migrate
 ```
 
-# run job command for excel import
+# Run job command for excel import
 ```
 docker compose exec products php artisan queue:work
 ```
 
-# run feature test
+# Run feature test
 ```
 sudo docker compose exec -e DB_CONNECTION=sqlite -e DB_DATABASE=:memory: products php artisan test tests/Feature/ProductCrudTest.php
 sudo docker compose exec -e DB_CONNECTION=sqlite -e DB_DATABASE=:memory: coupons php artisan test tests/Feature/CouponTest.php
 ```
 
-# in devlopment setup
+# Devlopment setup
 
-uncoment lines in `docker-compose.yml` file where is saying in comment 'uncomment ...'
+Uncoment lines in `docker-compose.yml` file where is saying in comment 'uncomment ...'.
 
-inside in folders `packages` create three seprate folders 'coupons', 'helper', 'products'
+Inside in folders `packages` create three seprate folders 'coupons', 'helper', 'products'
 
 in these three folder clone these github repositories (should correspond respectivaly)
-
+```
 https://github.com/latv/coupons
 https://github.com/latv/helper
 https://github.com/latv/products
-
+```
 
 and restart (if it`s not started) docker containers
 ```
