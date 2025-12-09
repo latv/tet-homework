@@ -32,11 +32,12 @@ services:
       - mysql
     networks:
       - app-network
-    volumes:
-      - ./main:/var/www/html
-      - ./packages/products:/var/www/html/vendor/tet/products
-      - ./packages/coupons:/var/www/html/vendor/tet/coupons
-      - ./packages/helper:/var/www/html/vendor/tet/helper
+    # uncoment in devlopment
+    # volumes:
+    #   - ./main:/var/www/html
+      # - ./packages/products:/var/www/html/vendor/tet/products
+      # - ./packages/coupons:/var/www/html/vendor/tet/coupons
+      # - ./packages/helper:/var/www/html/vendor/tet/helper
 
 
   coupons:
@@ -56,9 +57,10 @@ services:
       - mysql
     networks:
       - app-network
-    volumes:
-      - ./coupons:/var/www/html
-      - ./packages/helper:/var/www/html/vendor/tet/helper
+    # uncoment in devlopment
+    # volumes:
+    #   - ./coupons:/var/www/html
+      # - ./packages/helper:/var/www/html/vendor/tet/helper
 
   # 🏷️ Products Module
   products:
@@ -78,9 +80,10 @@ services:
       - mysql
     networks:
       - app-network
-    volumes:
-      - ./products:/var/www/html
-      - ./packages/helper:/var/www/html/vendor/tet/helper
+    # uncoment in devlopment
+    # volumes:
+    #   - ./products:/var/www/html
+      # - ./packages/helper:/var/www/html/vendor/tet/helper
 
 
 volumes:

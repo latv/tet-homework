@@ -10,8 +10,8 @@
         "laravel/framework": "^12.0",
         "laravel/tinker": "^2.10.1",
         "tet/coupons": "^1.0",
-        "tet/helper": "dev-main",
-        "tet/products": "dev-main as 1.0.0"
+        "tet/helper": "1.0.0",
+        "tet/products": "1.0.0"
     },
     "require-dev": {
         "fakerphp/faker": "^1.23",
