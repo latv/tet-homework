@@ -4,16 +4,18 @@ namespace App\Http\Controllers;
 
 use App\Models\Coupon;
 use Illuminate\Http\Request;
+use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Response;
 
 class CouponController extends Controller
 {
-    public function index()
+    public function index(): JsonResponse
     {
         $coupons = Coupon::all();
         return response()->json($coupons);
     }
 
-    public function store(Request $request)
+    public function store(Request $request): JsonResponse
     {
         $request->validate([
             'code' => 'required|string|unique:coupons,code|max:255',
@@ -28,13 +30,13 @@ class CouponController extends Controller
         return response()->json($coupon, 201);
     }
 
-    public function show(int $id)
+    public function show(int $id): JsonResponse
     {
         $coupon = Coupon::where('id', $id)->firstOrFail();
         return response()->json($coupon);
     }
 
-    public function update(int $id, Request $request)
+    public function update(int $id, Request $request): JsonResponse
     {
         $coupon = Coupon::where('id', $id)->firstOrFail();
 
@@ -52,7 +54,7 @@ class CouponController extends Controller
         return response()->json($coupon);
     }
 
-    public function destroy(int $id)
+    public function destroy(int $id): Response
     {
         Coupon::where('id', $id)->firstOrFail()->delete();
 

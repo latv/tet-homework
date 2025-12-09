@@ -40,11 +40,6 @@ sudo docker compose exec -e DB_CONNECTION=sqlite -e DB_DATABASE=:memory: product
 sudo docker compose exec -e DB_CONNECTION=sqlite -e DB_DATABASE=:memory: coupons php artisan test tests/Feature/CouponTest.php
 ```
 
-# Devlopment setup
-
-Uncoment lines in `docker-compose.yml` file where is saying in comment 'uncomment ...'.
-
-
 # Each module you should install Laravel packages
 
 ```

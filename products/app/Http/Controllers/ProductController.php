@@ -7,19 +7,21 @@ use Illuminate\Http\Request;
 use Tet\Helper\Common;
 use App\Imports\ProductsImport;
 use Maatwebsite\Excel\Facades\Excel;
+use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Response;
 
 class ProductController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(): JsonResponse
     {
         $products = Product::all();
         return response()->json($products);
     }
 
-    public function store(Request $request)
+    public function store(Request $request): JsonResponse
     {
 
         $request->validate([
@@ -40,7 +42,7 @@ class ProductController extends Controller
         return response()->json($product, 201);
     }
 
-    public function show(int $id)
+    public function show(int $id): JsonResponse
     {
         $product = Product::where('id', $id)->firstOrFail();
         $product->totalAmount = Common::productTotalAmount($product->price, $product->stock);
@@ -48,7 +50,7 @@ class ProductController extends Controller
         return response()->json($product);
     }
 
-    public function update(int $id, Request $request)
+    public function update(int $id, Request $request): JsonResponse
     {
         $product = Product::where('id', $id)->firstOrFail();
         $request->validate([
@@ -64,20 +66,19 @@ class ProductController extends Controller
     }
 
 
-    public function destroy(int $id)
+    public function destroy(int $id): Response
     {
         Product::where('id', $id)->firstOrFail()->delete();
 
         return response()->noContent();
     }
 
-    public function import(Request $request) 
+    public function import(Request $request): JsonResponse 
     {
         $request->validate([
             'file' => 'required|mimes:xlsx,csv',
         ]);
 
-        // This pushes the job to the queue and returns immediately
         Excel::queueImport(new ProductsImport, $request->file('file'));
 
         return response()->json(['message' => 'Import started'], 202);
