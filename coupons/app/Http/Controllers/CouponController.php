@@ -7,18 +7,12 @@ use Illuminate\Http\Request;
 
 class CouponController extends Controller
 {
-    /**
-     * Display a listing of the resource (READ: All).
-     */
     public function index()
     {
         $coupons = Coupon::all();
         return response()->json($coupons);
     }
 
-    /**
-     * Store a newly created resource in storage (CREATE).
-     */
     public function store(Request $request)
     {
         $request->validate([
@@ -34,18 +28,12 @@ class CouponController extends Controller
         return response()->json($coupon, 201);
     }
 
-    /**
-     * Display the specified resource (READ: Single).
-     */
     public function show(int $id)
     {
         $coupon = Coupon::where('id', $id)->firstOrFail();
         return response()->json($coupon);
     }
 
-    /**
-     * Update the specified resource in storage (UPDATE).
-     */
     public function update(int $id, Request $request)
     {
         $coupon = Coupon::where('id', $id)->firstOrFail();
@@ -64,9 +52,6 @@ class CouponController extends Controller
         return response()->json($coupon);
     }
 
-    /**
-     * Remove the specified resource from storage (DELETE).
-     */
     public function destroy(int $id)
     {
         Coupon::where('id', $id)->firstOrFail()->delete();
